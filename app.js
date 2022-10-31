@@ -1,22 +1,26 @@
-const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
-dotenv.config({ path: "./config.env" });
 require("./db/conn");
 const cors = require("cors");
+const http = require("http");
+const BodyParser = require("body-parser");
 
 const PORT = process.env.PORT || 5000;
-
+app.use;
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(require("./router/auth"));
+app.use(BodyParser.urlencoded({ extended: false }));
+app.use(BodyParser.json());
 
-app.get("/", async (req, res) => {
-  res.send(`Ishop backend 22 ${PORT}`);
+const Server = http.createServer(app);
+
+Server.listen(PORT, () => {
+  console.log(`Ishop Backend is running on localhost ${PORT}`);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running in port number ${PORT}`);
+app.get("/", async (req, res) => {
+  res.send(`Ishop backend Was Live Successfully ${PORT}`);
 });

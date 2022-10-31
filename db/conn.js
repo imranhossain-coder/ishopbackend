@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const DB = process.env.DATABASE;
+const DB =
+  "mongodb+srv://ishop:ishop552@cluster0.hqvztwf.mongodb.net/ishop?retryWrites=true&w=majority";
 
 mongoose
   .connect(DB, {
