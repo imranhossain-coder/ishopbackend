@@ -17,11 +17,8 @@ app.use(BodyParser.json());
 
 const Server = http.createServer(app);
 
-// Server.listen(PORT, () => {
-//   console.log(`Ishop Backend is running on localhost ${PORT}`);
-// });
-app.listen(PORT, () => {
-  console.log("ishop backend");
+Server.listen(PORT, () => {
+  console.log(`Ishop Backend is running on localhost ${PORT}`);
 });
 
 app.get("/", async (req, res) => {
