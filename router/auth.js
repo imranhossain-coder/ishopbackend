@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("../models/userSchema");
+const Product = require("../models/productSchema");
 const router = express.Router();
 
 // Register Route
@@ -44,6 +45,40 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     res.status(422).send(error);
   }
+});
+
+router.post("/postproduct", async (req, res) => {
+  const {
+    ProductName,
+    ProductImage,
+    ProductPrice,
+    desc,
+    category,
+    size,
+    color,
+  } = req.body;
+  try {
+    const product = new Product({
+      ProductName,
+      ProductImage,
+      ProductPrice,
+      desc,
+      category,
+      size,
+      color,
+    });
+    await product.save();
+    res.status(201).send("Product Send Sucessfully");
+  } catch (error) {
+    res.status(402).send("Product Not saved");
+  }
+});
+
+router.get("/products", async (req, res) => {
+  const Products = await Product.find();
+  // res.json(Products);
+  res.json(Products);
+  console.log(Products);
 });
 
 module.exports = router;
