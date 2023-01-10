@@ -6,10 +6,12 @@ const router = express.Router();
 // Register Route
 router.post("/register", async (req, res) => {
   const { name, email, profile_picture, dateofbirth, phone, pass } = req.body;
+  console.log(name, email, profile_picture, dateofbirth, phone, pass);
   try {
     const CheckEmail = await User.findOne({ email });
-    if (CheckEmail) {
-      return res.status(422).send("Email Is Already Exits");
+
+    if (CheckEmail !== null) {
+      res.status(422).send("Email Is Already Exits");
     } else {
       const user = new User({
         name,
@@ -19,8 +21,10 @@ router.post("/register", async (req, res) => {
         phone,
         pass,
       });
+
       await user.save();
       res.status(201).json(user);
+      console.log(user);
     }
   } catch (error) {
     res.status(422).send(error);
